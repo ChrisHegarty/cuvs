@@ -193,7 +193,8 @@ public class BruteForceIndexImpl implements BruteForceIndex{
         distancesMemorySegment,
         returnValue,
         prefilterDataMemorySegment,
-        prefilterDataLength, numRows
+        prefilterDataLength,
+        numRows
       );
       checkError(returnValue.get(C_INT, 0L), "searchMethodHandle");
     }

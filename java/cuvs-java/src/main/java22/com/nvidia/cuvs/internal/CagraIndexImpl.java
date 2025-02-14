@@ -167,13 +167,16 @@ public class CagraIndexImpl implements CagraIndex {
 
     MemorySegment dataSeg = Util.buildMemorySegment(resources.getArena(), dataset);
 
+    var resourcesSeg = resources.getMemorySegment();
+    assert !resourcesSeg.equals(MemorySegment.NULL);
+
     try (var localArena = Arena.ofConfined()) {
       MemorySegment returnValue = localArena.allocate(C_INT);
       var indexSeg = (MemorySegment) indexMethodHandle.invokeExact(
         dataSeg,
         rows,
         cols,
-        resources.getMemorySegment(),
+        resourcesSeg,
         returnValue,
         indexParamsMemorySegment,
         compressionParamsMemorySegment,
